@@ -13,7 +13,7 @@ document.getElementById("generate-email").addEventListener("click", function () 
   const contactNumber = document.getElementById("contact-number").value;
   const hodEmail = document.getElementById("hod-email").value;
 
-  // Predefined CC emails for HR and Security
+  // Predefined HR and Security emails
   const hrEmail = "hr@raayabyatmosphere.com";
   const securityEmail = "security@raayabyatmosphere.com";
 
@@ -22,8 +22,10 @@ document.getElementById("generate-email").addEventListener("click", function () 
     return;
   }
 
-  // Create email body
+  // Create email body with instructions for HOD
   const emailBody = `
+    Dear HOD,
+
     I, ${employeeName}, currently working at RAAYA BY ATMOSPHERE Resort as a ${employeePosition}, acknowledge that I have arranged for my own private boat transfers to travel out of the island on ${departureDate} and shall be arriving back on ${arrivalDate}.
 
     Boat Details:
@@ -38,10 +40,19 @@ document.getElementById("generate-email").addEventListener("click", function () 
     - Contact Number: ${contactNumber}
 
     I understand the safety & security hazards associated with privately arranged boat transfers and accept full responsibility. The resort is not liable for this trip.
+
+    **Action Required:**
+    - Please approve this request by replying to this email with "Approved" and forwarding it to HR (${hrEmail}).
+    - HR will then review and forward it to Security (${securityEmail}).
+    
+    Thank you for your attention.
+
+    Best regards,
+    ${employeeName}
   `;
 
-  // Generate mailto link with CC for HR and Security
-  const mailtoLink = `mailto:${hodEmail}?cc=${hrEmail},${securityEmail}&subject=Boat Transfer Disclaimer&body=${encodeURIComponent(
+  // Generate mailto link
+  const mailtoLink = `mailto:${hodEmail}?subject=Boat Transfer Disclaimer&body=${encodeURIComponent(
     emailBody
   )}`;
 
